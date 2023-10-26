@@ -8,10 +8,14 @@
 import Foundation
 
 
-extension Array where Element: Identifiable {
+extension Array {
     
-    func toMap() -> [Element.ID: Element] {
-        return [:]
+    func toMap<Key, Value> (keyMapper: (Element) -> Key, valueMapper: (Element) -> Value) -> [Key: Value] {
+        return self.reduce(into: [:] as [Key: Value]) { partialResult, element in
+            let key = keyMapper(element)
+            let value = valueMapper(element)
+            partialResult[key] = value
+        }
     }
     
 }

@@ -47,6 +47,7 @@
 		49D602BD2AE8DF1A00867C50 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		49D602BF2AE8DF2600867C50 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		49D602C22AE8E2C400867C50 /* ArrayExts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExts.swift; sourceTree = "<group>"; };
+		49D602C42AE8E68300867C50 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		49FCCC842AE023DF00FF8E3D /* SoftwareDevelopHomework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftwareDevelopHomework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49FCCC872AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftwareDevelopHomeworkApp.swift; sourceTree = "<group>"; };
 		49FCCC892AE023DF00FF8E3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +87,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49123D232AE937FB00425E70 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		49D602BA2AE8DEF800867C50 /* College */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,9 +112,17 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		49D602C72AE8E72A00867C50 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		49FCCC7B2AE023DF00FF8E3D = {
 			isa = PBXGroup;
 			children = (
+				49D602C42AE8E68300867C50 /* README.md */,
 				49FCCC862AE023DF00FF8E3D /* SoftwareDevelopHomework */,
 				49FCCC982AE023E100FF8E3D /* SoftwareDevelopHomeworkTests */,
 				49FCCCA22AE023E100FF8E3D /* SoftwareDevelopHomeworkUITests */,
@@ -127,6 +143,8 @@
 		49FCCC862AE023DF00FF8E3D /* SoftwareDevelopHomework */ = {
 			isa = PBXGroup;
 			children = (
+				49123D232AE937FB00425E70 /* Entity */,
+				49D602C72AE8E72A00867C50 /* View */,
 				49D602C12AE8E2B400867C50 /* Util */,
 				49D602BA2AE8DEF800867C50 /* College */,
 				49FCCCB22AE0257900FF8E3D /* Calendar */,
