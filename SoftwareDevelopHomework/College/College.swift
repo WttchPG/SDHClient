@@ -39,7 +39,7 @@ class College: Codable {
     ///   - beginDate: 入学时间
     ///   - groupId: 班级 id
     func addStudent(id: String, name: String, idcard: String, beginDate: Date, groupId: String?) {
-        var student = Student(id: id, name: name, idcard: idcard, beginDate: beginDate, groupId: groupId)
+        let student = Student(id: id, name: name, idcard: idcard, beginDate: beginDate, groupId: groupId)
         
         if let groupId = groupId, let group = self.groupIdMap[groupId] {
             // 添加到指定班级

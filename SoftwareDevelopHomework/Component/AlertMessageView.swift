@@ -11,10 +11,21 @@ import Combine
 // MARK: ENTITY
 
 /// 消息
-struct AlertMessage {
+struct AlertMessage: Equatable {
+    private let id: String
     // 消息类型
     let type: AlertMessageType
     let message: String
+    
+    init(type: AlertMessageType, message: String) {
+        self.id = UUID().uuidString
+        self.type = type
+        self.message = message
+    }
+    
+    static func ==(lhs: AlertMessage, rhs: AlertMessage) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 /// 消息类型
@@ -34,6 +45,14 @@ class AlertMessageManager {
     
     private init() {
         publisher = PassthroughSubject<AlertMessage, Never>()
+    }
+    
+    static func send(_ msg: AlertMessage) {
+        instance.publisher.send(msg)
+    }
+    
+    static func warning(_ msg: String) {
+        instance.publisher.send(AlertMessage(type: .warning, message: msg))
     }
 }
 
