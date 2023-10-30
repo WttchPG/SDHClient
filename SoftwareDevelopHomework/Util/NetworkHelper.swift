@@ -13,7 +13,7 @@ class NetworkHelper {
     static let applicationJsonUtf8 = "application/json; charset=utf-8"
     
     
-    static func post<T: Codable, D: Encodable>(url urlStr: String, data: D, type: T.Type) -> AnyPublisher<T?, Error> {
+    static func post<T: Codable>(url urlStr: String, data: (any Encodable)?, type: T.Type, bearerToken: String?) -> AnyPublisher<T?, Error> {
         let requestPublisher = PassthroughSubject<T?, Error>()
         
         guard let url = URL(string: urlStr) else {
@@ -32,7 +32,16 @@ class NetworkHelper {
         urlRequest.setContentType(applicationJsonUtf8)
         urlRequest.setAccept(applicationJsonUtf8)
         urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = try? JSONEncoder().encode(data)
+        
+        // json 请求体
+        if let data = data {
+            urlRequest.httpBody = try? JSONEncoder().encode(data)
+        }
+        
+        // token
+        if let token = bearerToken {
+            urlRequest.setBearerAuthorization(token)
+        }
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             // http 请求所在的线程
@@ -102,5 +111,14 @@ extension URLRequest {
     
     mutating func setAccept(_ contentType: String) {
         self.setValue(contentType, forHTTPHeaderField: "Accept")
+    }
+    
+    /// 在 header 中添加 token。
+    ///
+    /// "Authorization": "Bearer xxxxxxxxx"
+    ///
+    /// - Parameter token: jwt token
+    mutating func setBearerAuthorization(_ token: String) {
+        self.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     }
 }

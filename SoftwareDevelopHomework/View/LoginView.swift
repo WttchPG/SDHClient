@@ -10,49 +10,32 @@ import Combine
 
 // MARK: VIEW
 struct LoginView: View {
-    @AppStorage("login_username") private var username: String = ""
-    @State private var password: String = ""
+    // 打开关闭窗口
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
     
+    @AppStorage("jwt") private var storagedJwt: String?
+    @AppStorage("login_username") private var username: String = ""
+    
+    @State private var password: String = ""
     @ObservedObject private var vm = LoginViewModel()
     
     var body: some View {
         GeometryReader(content: { geometry in
-            VStack(spacing: 24) {
+            VStack {
                 Spacer()
-                HStack {
-                    VStack {
-                        Text("Every word")
-                        Text("counts here")
+                if let jwt = self.storagedJwt {
+                    if let userInfo = vm.userInfo {
+                        Text("你好! \(userInfo.realName), \(userInfo.email)")
                     }
-                    
-                    Spacer()
+                    if vm.loadingUserInfo {
+                        ProgressView(label: {
+                            Text("获取用户信息!")
+                        })
+                    }
+                } else {
+                    loginView(geometry: geometry)
                 }
-                .font(.largeTitle)
-                .foregroundColor(.white)
-                HStack {
-                    Text("记住单词，记录改变")
-                    Spacer()
-                }
-                .font(.title)
-                .foregroundColor(.white)
-                
-                TextField("请输入账号", text: $username)
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                SecureField("请输入密码", text: $password)
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                
-                Button(action: {
-                    login()
-                }, label: {
-                    Text("登录")
-                        .cornerRadius(16)
-                        .frame(maxWidth: .infinity)
-                })
-                
                 Spacer()
             }
             .background(content: {
@@ -71,8 +54,25 @@ struct LoginView: View {
         .ignoresSafeArea(edges: .top)
         .wrapperAlert()
         .onChange(of: vm.alertMessage, initial: false) { msg, _ in
-            guard let msg = msg else { return }
+            guard let msg = vm.alertMessage else { return }
             AlertMessageManager.send(msg)
+        }
+        .onChange(of: vm.jwt, initial: false) { jwt, _ in
+            if let jwt = vm.jwt {
+                self.storagedJwt = jwt
+                AlertMessageManager.success("登录成功!")
+            }
+        }
+        .onChange(of: vm.userInfo, { _, newValue in
+            if let userInfo = newValue {
+                dismissWindow(window: .login)
+                openWindow(window: .main, data: userInfo)
+            }
+        })
+        .onAppear {
+            if let jwt = self.storagedJwt {
+                vm.userInfo(jwt: jwt)
+            }
         }
     }
     
@@ -83,6 +83,35 @@ struct LoginView: View {
         }
         
         vm.login(username: username, password: password)
+    }
+    
+    private func loginView(geometry: GeometryProxy) -> some View {
+        VStack(spacing: 24) {
+            HStack {
+                Text("Every word\ncounts here")
+                Spacer()
+            }
+            .font(.largeTitle)
+            HStack {
+                Text("记住单词，记录改变")
+                Spacer()
+            }
+            
+            TextField("请输入账号", text: $username)
+                .multilineTextAlignment(.center)
+            SecureField("请输入密码", text: $password)
+                .multilineTextAlignment(.center)
+            
+            Button(action: {
+                login()
+            }, label: {
+                Text("登录")
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
+            })
+        }
+        .foregroundColor(.white)
+        .font(.title)
     }
 }
 
@@ -95,6 +124,8 @@ struct LoginView: View {
 class LoginViewModel: ObservableObject {
     @Published var alertMessage: AlertMessage? = nil
     @Published var jwt: String? = nil
+    @Published var loadingUserInfo = false
+    @Published var userInfo: UserDTO? = nil
     
     private var service = LoginService()
     
@@ -103,14 +134,25 @@ class LoginViewModel: ObservableObject {
     init() {
         service.$alertMessage.sink{
             self.alertMessage = $0
-        }
-            .store(in: &cancelles)
-        service.$jwt.sink { self.jwt = $0 }
-            .store(in: &cancelles)
+        }.store(in: &cancelles)
+        
+        service.$jwt.sink {
+            self.jwt = $0
+        }.store(in: &cancelles)
+        
+        service.$userInfo.sink {
+            self.userInfo = $0
+            self.loadingUserInfo = false
+        }.store(in: &cancelles)
     }
     
     func login(username: String, password: String) {
         service.login(username: username, password: password)
+    }
+    
+    func userInfo(jwt: String) {
+        self.loadingUserInfo = true
+        service.userInfo(jwt: jwt)
     }
     
 }

@@ -11,6 +11,9 @@
 		493BBF082AEB604C00AAB322 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF072AEB604C00AAB322 /* LoginService.swift */; };
 		493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF092AEB607400AAB322 /* BaseAPIService.swift */; };
 		493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0B2AEB674F00AAB322 /* LoginView.swift */; };
+		493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */; };
+		4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDB62AEEA0C100E97C51 /* Windows.swift */; };
+		4944DDB92AEF810200E97C51 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDB82AEF810200E97C51 /* MainView.swift */; };
 		494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */; };
 		494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E52AEA4BA400E08202 /* APIResponse.swift */; };
 		494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E82AEA7BC600E08202 /* AlertMessageView.swift */; };
@@ -21,7 +24,6 @@
 		49D602C02AE8DF2600867C50 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D602BF2AE8DF2600867C50 /* Student.swift */; };
 		49D602C32AE8E2C400867C50 /* ArrayExts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D602C22AE8E2C400867C50 /* ArrayExts.swift */; };
 		49FCCC882AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FCCC872AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift */; };
-		49FCCC8A2AE023DF00FF8E3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FCCC892AE023DF00FF8E3D /* ContentView.swift */; };
 		49FCCC8C2AE023E100FF8E3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49FCCC8B2AE023E100FF8E3D /* Assets.xcassets */; };
 		49FCCC8F2AE023E100FF8E3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49FCCC8E2AE023E100FF8E3D /* Preview Assets.xcassets */; };
 		49FCCC9A2AE023E100FF8E3D /* SoftwareDevelopHomeworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FCCC992AE023E100FF8E3D /* SoftwareDevelopHomeworkTests.swift */; };
@@ -52,6 +54,9 @@
 		493BBF072AEB604C00AAB322 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		493BBF092AEB607400AAB322 /* BaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAPIService.swift; path = ../../../../../Music/BaseAPIService.swift; sourceTree = "<group>"; };
 		493BBF0B2AEB674F00AAB322 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
+		4944DDB62AEEA0C100E97C51 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
+		4944DDB82AEF810200E97C51 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		494AE7E52AEA4BA400E08202 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		494AE7E82AEA7BC600E08202 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
@@ -64,7 +69,6 @@
 		49D602C42AE8E68300867C50 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		49FCCC842AE023DF00FF8E3D /* SoftwareDevelopHomework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftwareDevelopHomework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49FCCC872AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftwareDevelopHomeworkApp.swift; sourceTree = "<group>"; };
-		49FCCC892AE023DF00FF8E3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49FCCC8B2AE023E100FF8E3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49FCCC8E2AE023E100FF8E3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49FCCC902AE023E100FF8E3D /* SoftwareDevelopHomework.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoftwareDevelopHomework.entitlements; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				494AE7E52AEA4BA400E08202 /* APIResponse.swift */,
+				493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				493BBF0B2AEB674F00AAB322 /* LoginView.swift */,
+				4944DDB82AEF810200E97C51 /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 		49FCCC862AE023DF00FF8E3D /* SoftwareDevelopHomework */ = {
 			isa = PBXGroup;
 			children = (
+				4944DDB62AEEA0C100E97C51 /* Windows.swift */,
 				493BBF062AEB603F00AAB322 /* Service */,
 				494AE7E72AEA7AA700E08202 /* Component */,
 				49123D232AE937FB00425E70 /* Entity */,
@@ -194,7 +201,6 @@
 				49D602BA2AE8DEF800867C50 /* College */,
 				49FCCCB22AE0257900FF8E3D /* Calendar */,
 				49FCCC872AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift */,
-				49FCCC892AE023DF00FF8E3D /* ContentView.swift */,
 				49FCCC8B2AE023E100FF8E3D /* Assets.xcassets */,
 				49FCCC902AE023E100FF8E3D /* SoftwareDevelopHomework.entitlements */,
 				49FCCC8D2AE023E100FF8E3D /* Preview Content */,
@@ -368,9 +374,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				49D602BE2AE8DF1A00867C50 /* Group.swift in Sources */,
-				49FCCC8A2AE023DF00FF8E3D /* ContentView.swift in Sources */,
+				4944DDB92AEF810200E97C51 /* MainView.swift in Sources */,
 				493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */,
 				494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */,
+				493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */,
+				4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */,
 				49FCCC882AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift in Sources */,
 				49CEC98C2AE15E8D00313DBB /* CalenderSeletor.swift in Sources */,
 				494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */,

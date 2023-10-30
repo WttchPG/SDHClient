@@ -34,6 +34,17 @@ enum AlertMessageType {
     case success
     case warning
     case error
+    
+    var color: Color {
+        let colors: [AlertMessageType: Color] = [
+            .info: .black,
+            .success: .green,
+            .warning: .orange,
+            .error: .red
+        ]
+        
+        return colors[self]!
+    }
 }
 
 // MARK: Manager
@@ -53,6 +64,10 @@ class AlertMessageManager {
     
     static func warning(_ msg: String) {
         instance.publisher.send(AlertMessage(type: .warning, message: msg))
+    }
+    
+    static func success(_ msg: String) {
+        instance.publisher.send(AlertMessage(type: .success, message: msg))
     }
 }
 
@@ -82,23 +97,19 @@ struct AlertMessageView<Content>: View where Content: View{
                         Text("\(message?.message ?? "")")
                         
                         Spacer()
-                        
-                        Button("关闭") {
-                            withAnimation {
-                                self.offset = -36
-                            }
-                        }
                     }
+                    .cornerRadius(4)
+                    .padding(.horizontal, 48)
                     .frame(maxWidth: .infinity)
                     .frame(height: 36)
-                    .background(.red.opacity(0.4))
-                    .cornerRadius(4)
-                    .padding(.horizontal, 8)
+                    .foregroundColor(.white)
+                    .background(message?.type.color.opacity(0.4))
                     .offset(y: offset)
                     .clipped() // 让弹窗不影响标题栏
                     
                     Spacer()
                 }
+                .padding(.horizontal, 24)
             })
             .zIndex(1000)
             
