@@ -59,16 +59,17 @@ struct LoginView: View {
         }
         .onChange(of: vm.jwt, initial: false) { _, newJwt in
             self.storagedJwt = newJwt
-            if let _ = newJwt {
+            if let jwt = newJwt {
                 // 登录成功
                 AlertMessageManager.success("登录成功!")
+                vm.userInfo(jwt: jwt)
             } else {
                 // jwt 失效
                 AlertMessageManager.warning("jwt 失效!")
             }
         }
-        .onChange(of: vm.userInfo, { _, newValue in
-            if let userInfo = newValue {
+        .onChange(of: vm.userInfo, { oldValue, newValue in
+            if let userInfo = vm.userInfo {
                 dismissWindow(window: .login)
                 openWindow(window: .main, data: userInfo)
             }
@@ -80,18 +81,10 @@ struct LoginView: View {
         })
         .onAppear {
             if let jwt = self.storagedJwt {
+                print("已存在 jwt， 尝试获取用户信息...")
                 vm.userInfo(jwt: jwt)
             }
         }
-    }
-    
-    private func login() {
-        guard !username.isEmpty && !password.isEmpty else {
-            AlertMessageManager.warning("账号或密码为空!")
-            return
-        }
-        
-        vm.login(username: username, password: password)
     }
     
     private func loginView(geometry: GeometryProxy) -> some View {
@@ -121,6 +114,16 @@ struct LoginView: View {
         }
         .foregroundColor(.white)
         .font(.title)
+    }
+    
+    
+    private func login() {
+        guard !username.isEmpty && !password.isEmpty else {
+            AlertMessageManager.warning("账号或密码为空!")
+            return
+        }
+        
+        vm.login(username: username, password: password)
     }
 }
 

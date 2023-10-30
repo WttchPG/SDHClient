@@ -25,7 +25,7 @@ class NetworkHelper {
     static let applicationJsonUtf8 = "application/json; charset=utf-8"
     
     
-    static func post<T: Codable>(url urlStr: String, data: (any Encodable)?, type: T.Type, httpMethod: String?, bearerToken: String?) -> AnyPublisher<T, Error> {
+    static func request<T: Codable>(url urlStr: String, data: (any Encodable)?, type: T.Type, httpMethod: String?, bearerToken: String?) -> AnyPublisher<T, Error> {
         let requestPublisher = PassthroughSubject<T, Error>()
         
         guard let url = URL(string: urlStr) else {
@@ -66,6 +66,8 @@ class NetworkHelper {
                 guard statusCode >= 200 && statusCode < 300 else {
                     throw NetworkError.badResponse(code: statusCode)
                 }
+                
+                print("响应数据: \(String(bytes: output.data, encoding: .utf8))")
                 
                 return output.data
             })

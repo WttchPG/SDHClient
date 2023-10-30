@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 class LoginService: BaseAPIService {
-    @Published var jwt: String?
-    @Published var userInfo: UserDTO?
+    @Published var jwt: String? = nil
+    @Published var userInfo: UserDTO? = nil
     @Published var jwtExpired: Bool = false
     
     private var loginCancelable: AnyCancellable? = nil
@@ -25,6 +25,7 @@ class LoginService: BaseAPIService {
             .build()
             .sink(receiveValue: {
                 self.jwt = $0
+                print("获取 token 成功!")
             })
     }
     
@@ -39,6 +40,7 @@ class LoginService: BaseAPIService {
             .sink(receiveCompletion: { fin in
                 completion?()
             }, receiveValue: {
+                print("获取 user info 成功!")
                 self.userInfo = $0
             })
     }
