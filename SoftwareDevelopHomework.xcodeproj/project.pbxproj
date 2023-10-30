@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		493BBF052AEB4FA300AAB322 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF042AEB4FA300AAB322 /* Errors.swift */; };
 		493BBF082AEB604C00AAB322 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF072AEB604C00AAB322 /* LoginService.swift */; };
 		493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF092AEB607400AAB322 /* BaseAPIService.swift */; };
 		493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0B2AEB674F00AAB322 /* LoginView.swift */; };
@@ -50,7 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		493BBF042AEB4FA300AAB322 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		493BBF072AEB604C00AAB322 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		493BBF092AEB607400AAB322 /* BaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAPIService.swift; path = ../../../../../Music/BaseAPIService.swift; sourceTree = "<group>"; };
 		493BBF0B2AEB674F00AAB322 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			children = (
 				49D602C22AE8E2C400867C50 /* ArrayExts.swift */,
 				494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */,
-				493BBF042AEB4FA300AAB322 /* Errors.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -383,7 +380,6 @@
 				49CEC98C2AE15E8D00313DBB /* CalenderSeletor.swift in Sources */,
 				494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */,
 				494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */,
-				493BBF052AEB4FA300AAB322 /* Errors.swift in Sources */,
 				49CEC98A2AE15A4100313DBB /* CalenderView.swift in Sources */,
 				49D602C32AE8E2C400867C50 /* ArrayExts.swift in Sources */,
 				49FCCCB42AE0258900FF8E3D /* CalendarUtil.swift in Sources */,

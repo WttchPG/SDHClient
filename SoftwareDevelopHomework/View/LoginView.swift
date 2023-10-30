@@ -57,16 +57,25 @@ struct LoginView: View {
             guard let msg = vm.alertMessage else { return }
             AlertMessageManager.send(msg)
         }
-        .onChange(of: vm.jwt, initial: false) { jwt, _ in
-            if let jwt = vm.jwt {
-                self.storagedJwt = jwt
+        .onChange(of: vm.jwt, initial: false) { _, newJwt in
+            self.storagedJwt = newJwt
+            if let _ = newJwt {
+                // 登录成功
                 AlertMessageManager.success("登录成功!")
+            } else {
+                // jwt 失效
+                AlertMessageManager.warning("jwt 失效!")
             }
         }
         .onChange(of: vm.userInfo, { _, newValue in
             if let userInfo = newValue {
                 dismissWindow(window: .login)
                 openWindow(window: .main, data: userInfo)
+            }
+        })
+        .onChange(of: vm.jwtExpired, { oldValue, newValue in
+            if newValue {
+                self.storagedJwt = nil
             }
         })
         .onAppear {
@@ -126,6 +135,7 @@ class LoginViewModel: ObservableObject {
     @Published var jwt: String? = nil
     @Published var loadingUserInfo = false
     @Published var userInfo: UserDTO? = nil
+    @Published var jwtExpired: Bool = false
     
     private var service = LoginService()
     
@@ -142,7 +152,10 @@ class LoginViewModel: ObservableObject {
         
         service.$userInfo.sink {
             self.userInfo = $0
-            self.loadingUserInfo = false
+        }.store(in: &cancelles)
+        
+        service.$jwtExpired.sink {
+            self.jwtExpired = $0
         }.store(in: &cancelles)
     }
     
@@ -152,7 +165,9 @@ class LoginViewModel: ObservableObject {
     
     func userInfo(jwt: String) {
         self.loadingUserInfo = true
-        service.userInfo(jwt: jwt)
+        service.userInfo(jwt: jwt) {
+            self.loadingUserInfo = false
+        }
     }
     
 }
