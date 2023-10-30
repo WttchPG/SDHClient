@@ -74,16 +74,16 @@ struct LoginView: View {
                 openWindow(window: .main, data: userInfo)
             }
         })
-        .onChange(of: vm.jwtExpired, { oldValue, newValue in
-            if newValue {
-                self.storagedJwt = nil
-            }
-        })
+        .on401 {
+            logger.info("收到 401 事件:\($0)")
+            self.storagedJwt = nil
+        }
         .onAppear {
             if let jwt = self.storagedJwt {
                 print("已存在 jwt， 尝试获取用户信息...")
                 vm.userInfo(jwt: jwt)
             }
+            logger.logLevel = .debug
         }
     }
     
@@ -138,7 +138,6 @@ class LoginViewModel: ObservableObject {
     @Published var jwt: String? = nil
     @Published var loadingUserInfo = false
     @Published var userInfo: UserDTO? = nil
-    @Published var jwtExpired: Bool = false
     
     private var service = LoginService()
     
@@ -155,10 +154,6 @@ class LoginViewModel: ObservableObject {
         
         service.$userInfo.sink {
             self.userInfo = $0
-        }.store(in: &cancelles)
-        
-        service.$jwtExpired.sink {
-            self.jwtExpired = $0
         }.store(in: &cancelles)
     }
     

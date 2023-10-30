@@ -67,7 +67,7 @@ class NetworkHelper {
                     throw NetworkError.badResponse(code: statusCode)
                 }
                 
-                print("响应数据: \(String(bytes: output.data, encoding: .utf8))")
+                logger.debug("响应数据: \(String(bytes: output.data, encoding: .utf8) ?? "None")")
                 
                 return output.data
             })

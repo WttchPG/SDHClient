@@ -13,6 +13,14 @@
 		493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */; };
 		4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDB62AEEA0C100E97C51 /* Windows.swift */; };
 		4944DDB92AEF810200E97C51 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDB82AEF810200E97C51 /* MainView.swift */; };
+		4944DDBC2AEFC95D00E97C51 /* SDH.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDBA2AEFC95D00E97C51 /* SDH.xcdatamodeld */; };
+		4944DDBE2AEFCA5400E97C51 /* WordDictionaryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDBD2AEFCA5400E97C51 /* WordDictionaryDTO.swift */; };
+		4944DDC02AEFCA5B00E97C51 /* WordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDBF2AEFCA5B00E97C51 /* WordDTO.swift */; };
+		4944DDC22AEFCCEB00E97C51 /* WordSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDC12AEFCCEB00E97C51 /* WordSerivce.swift */; };
+		4944DDC52AEFCE3300E97C51 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDC42AEFCE3300E97C51 /* MainViewModel.swift */; };
+		4944DDC82AEFD62600E97C51 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 4944DDC72AEFD62600E97C51 /* Logging */; };
+		4944DDCA2AEFD63300E97C51 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDC92AEFD63300E97C51 /* Logs.swift */; };
+		4944DDCC2AEFE0B100E97C51 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDCB2AEFE0B100E97C51 /* CoreDataManager.swift */; };
 		494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */; };
 		494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E52AEA4BA400E08202 /* APIResponse.swift */; };
 		494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E82AEA7BC600E08202 /* AlertMessageView.swift */; };
@@ -55,6 +63,13 @@
 		493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		4944DDB62AEEA0C100E97C51 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		4944DDB82AEF810200E97C51 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4944DDBB2AEFC95D00E97C51 /* SDH.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SDH.xcdatamodel; sourceTree = "<group>"; };
+		4944DDBD2AEFCA5400E97C51 /* WordDictionaryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDictionaryDTO.swift; sourceTree = "<group>"; };
+		4944DDBF2AEFCA5B00E97C51 /* WordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDTO.swift; sourceTree = "<group>"; };
+		4944DDC12AEFCCEB00E97C51 /* WordSerivce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSerivce.swift; sourceTree = "<group>"; };
+		4944DDC42AEFCE3300E97C51 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4944DDC92AEFD63300E97C51 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
+		4944DDCB2AEFE0B100E97C51 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		494AE7E52AEA4BA400E08202 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		494AE7E82AEA7BC600E08202 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
@@ -83,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4944DDC82AEFD62600E97C51 /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,10 +130,20 @@
 		493BBF062AEB603F00AAB322 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				493BBF072AEB604C00AAB322 /* LoginService.swift */,
 				493BBF092AEB607400AAB322 /* BaseAPIService.swift */,
+				493BBF072AEB604C00AAB322 /* LoginService.swift */,
+				4944DDC12AEFCCEB00E97C51 /* WordSerivce.swift */,
+				4944DDCB2AEFE0B100E97C51 /* CoreDataManager.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		4944DDC32AEFCE2600E97C51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4944DDC42AEFCE3300E97C51 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		494AE7E42AEA4B9400E08202 /* DTO */ = {
@@ -125,6 +151,8 @@
 			children = (
 				494AE7E52AEA4BA400E08202 /* APIResponse.swift */,
 				493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */,
+				4944DDBF2AEFCA5B00E97C51 /* WordDTO.swift */,
+				4944DDBD2AEFCA5400E97C51 /* WordDictionaryDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -152,6 +180,7 @@
 			children = (
 				49D602C22AE8E2C400867C50 /* ArrayExts.swift */,
 				494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */,
+				4944DDC92AEFD63300E97C51 /* Logs.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -159,6 +188,7 @@
 		49D602C72AE8E72A00867C50 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4944DDC32AEFCE2600E97C51 /* ViewModel */,
 				493BBF0B2AEB674F00AAB322 /* LoginView.swift */,
 				4944DDB82AEF810200E97C51 /* MainView.swift */,
 			);
@@ -201,6 +231,7 @@
 				49FCCC8B2AE023E100FF8E3D /* Assets.xcassets */,
 				49FCCC902AE023E100FF8E3D /* SoftwareDevelopHomework.entitlements */,
 				49FCCC8D2AE023E100FF8E3D /* Preview Content */,
+				4944DDBA2AEFC95D00E97C51 /* SDH.xcdatamodeld */,
 			);
 			path = SoftwareDevelopHomework;
 			sourceTree = "<group>";
@@ -256,6 +287,9 @@
 			dependencies = (
 			);
 			name = SoftwareDevelopHomework;
+			packageProductDependencies = (
+				4944DDC72AEFD62600E97C51 /* Logging */,
+			);
 			productName = SoftwareDevelopHomework;
 			productReference = 49FCCC842AE023DF00FF8E3D /* SoftwareDevelopHomework.app */;
 			productType = "com.apple.product-type.application";
@@ -328,6 +362,9 @@
 				Base,
 			);
 			mainGroup = 49FCCC7B2AE023DF00FF8E3D;
+			packageReferences = (
+				4944DDC62AEFD62600E97C51 /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			productRefGroup = 49FCCC852AE023DF00FF8E3D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -375,18 +412,25 @@
 				493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */,
 				494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */,
 				493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */,
+				4944DDCA2AEFD63300E97C51 /* Logs.swift in Sources */,
+				4944DDCC2AEFE0B100E97C51 /* CoreDataManager.swift in Sources */,
 				4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */,
 				49FCCC882AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift in Sources */,
 				49CEC98C2AE15E8D00313DBB /* CalenderSeletor.swift in Sources */,
 				494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */,
 				494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */,
+				4944DDBE2AEFCA5400E97C51 /* WordDictionaryDTO.swift in Sources */,
 				49CEC98A2AE15A4100313DBB /* CalenderView.swift in Sources */,
+				4944DDBC2AEFC95D00E97C51 /* SDH.xcdatamodeld in Sources */,
 				49D602C32AE8E2C400867C50 /* ArrayExts.swift in Sources */,
 				49FCCCB42AE0258900FF8E3D /* CalendarUtil.swift in Sources */,
+				4944DDC22AEFCCEB00E97C51 /* WordSerivce.swift in Sources */,
+				4944DDC02AEFCA5B00E97C51 /* WordDTO.swift in Sources */,
 				49D602BC2AE8DF0900867C50 /* College.swift in Sources */,
 				49D602C02AE8DF2600867C50 /* Student.swift in Sources */,
 				493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */,
 				493BBF082AEB604C00AAB322 /* LoginService.swift in Sources */,
+				4944DDC52AEFCE3300E97C51 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +751,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4944DDC62AEFD62600E97C51 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4944DDC72AEFD62600E97C51 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4944DDC62AEFD62600E97C51 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		4944DDBA2AEFC95D00E97C51 /* SDH.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4944DDBB2AEFC95D00E97C51 /* SDH.xcdatamodel */,
+			);
+			currentVersion = 4944DDBB2AEFC95D00E97C51 /* SDH.xcdatamodel */;
+			path = SDH.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 49FCCC7C2AE023DF00FF8E3D /* Project object */;
 }

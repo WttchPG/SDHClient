@@ -25,8 +25,13 @@ func loginWindow() -> some Scene {
 
 func mainWindow() -> some Scene {
     return WindowGroup(id: Windows.main.rawValue, for: UserDTO.self) { userInfo in
-        MainView(userInfo: userInfo.wrappedValue)
+        if let userInfo = userInfo.wrappedValue {
+            MainView(userInfo: userInfo)
+        } else {
+            Text("错误! 没有用户信息！")
+        }
     }
+    .windowStyle(.hiddenTitleBar)
 }
 
 extension DismissWindowAction {
