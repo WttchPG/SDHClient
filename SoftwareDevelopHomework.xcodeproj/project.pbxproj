@@ -24,6 +24,9 @@
 		494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */; };
 		494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E52AEA4BA400E08202 /* APIResponse.swift */; };
 		494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494AE7E82AEA7BC600E08202 /* AlertMessageView.swift */; };
+		49ABC5D62AF21D5C0078374E /* DictionaryWordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ABC5D52AF21D5C0078374E /* DictionaryWordListView.swift */; };
+		49ABC5D82AF21DAC0078374E /* AdvMeanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ABC5D72AF21DAB0078374E /* AdvMeanView.swift */; };
+		49ABC5DA2AF21E340078374E /* DictionaryWordListWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ABC5D92AF21E340078374E /* DictionaryWordListWordView.swift */; };
 		49CEC98A2AE15A4100313DBB /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CEC9892AE15A4100313DBB /* CalenderView.swift */; };
 		49CEC98C2AE15E8D00313DBB /* CalenderSeletor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CEC98B2AE15E8D00313DBB /* CalenderSeletor.swift */; };
 		49D602BC2AE8DF0900867C50 /* College.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D602BB2AE8DF0900867C50 /* College.swift */; };
@@ -73,6 +76,9 @@
 		494AE7E22AEA4B5D00E08202 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		494AE7E52AEA4BA400E08202 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		494AE7E82AEA7BC600E08202 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
+		49ABC5D52AF21D5C0078374E /* DictionaryWordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryWordListView.swift; sourceTree = "<group>"; };
+		49ABC5D72AF21DAB0078374E /* AdvMeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvMeanView.swift; sourceTree = "<group>"; };
+		49ABC5D92AF21E340078374E /* DictionaryWordListWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryWordListWordView.swift; sourceTree = "<group>"; };
 		49CEC9892AE15A4100313DBB /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		49CEC98B2AE15E8D00313DBB /* CalenderSeletor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderSeletor.swift; sourceTree = "<group>"; };
 		49D602BB2AE8DF0900867C50 /* College.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = College.swift; sourceTree = "<group>"; };
@@ -191,6 +197,9 @@
 				4944DDC32AEFCE2600E97C51 /* ViewModel */,
 				493BBF0B2AEB674F00AAB322 /* LoginView.swift */,
 				4944DDB82AEF810200E97C51 /* MainView.swift */,
+				49ABC5D52AF21D5C0078374E /* DictionaryWordListView.swift */,
+				49ABC5D92AF21E340078374E /* DictionaryWordListWordView.swift */,
+				49ABC5D72AF21DAB0078374E /* AdvMeanView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -411,6 +420,7 @@
 				4944DDB92AEF810200E97C51 /* MainView.swift in Sources */,
 				493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */,
 				494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */,
+				49ABC5D62AF21D5C0078374E /* DictionaryWordListView.swift in Sources */,
 				493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */,
 				4944DDCA2AEFD63300E97C51 /* Logs.swift in Sources */,
 				4944DDCC2AEFE0B100E97C51 /* CoreDataManager.swift in Sources */,
@@ -421,11 +431,13 @@
 				494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */,
 				4944DDBE2AEFCA5400E97C51 /* WordDictionaryDTO.swift in Sources */,
 				49CEC98A2AE15A4100313DBB /* CalenderView.swift in Sources */,
+				49ABC5D82AF21DAC0078374E /* AdvMeanView.swift in Sources */,
 				4944DDBC2AEFC95D00E97C51 /* SDH.xcdatamodeld in Sources */,
 				49D602C32AE8E2C400867C50 /* ArrayExts.swift in Sources */,
 				49FCCCB42AE0258900FF8E3D /* CalendarUtil.swift in Sources */,
 				4944DDC22AEFCCEB00E97C51 /* WordSerivce.swift in Sources */,
 				4944DDC02AEFCA5B00E97C51 /* WordDTO.swift in Sources */,
+				49ABC5DA2AF21E340078374E /* DictionaryWordListWordView.swift in Sources */,
 				49D602BC2AE8DF0900867C50 /* College.swift in Sources */,
 				49D602C02AE8DF2600867C50 /* Student.swift in Sources */,
 				493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */,

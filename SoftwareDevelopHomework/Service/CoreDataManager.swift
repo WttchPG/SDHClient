@@ -36,6 +36,9 @@ class CoreDataManager {
         }
     }
     
+    /// 从 CoreData 中查询数据
+    /// - Parameter fetch: 查询请求
+    /// - Returns: CoreData 中的数据
     static func fetch<ResultType>(_ fetch: NSFetchRequest<ResultType>) -> [ResultType] where ResultType: NSFetchRequestResult {
         do {
             let result = try instance.context.fetch(fetch)
@@ -44,5 +47,11 @@ class CoreDataManager {
             logger.error("读取数据失败: \(error.localizedDescription)")
             return []
         }
+    }
+    
+    
+    /// 从 CoreData 中删除数据
+    static func delete<T: NSManagedObject>(_ data: T) {
+        instance.context.delete(data)
     }
 }

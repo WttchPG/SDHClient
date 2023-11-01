@@ -7,12 +7,15 @@
         <attribute name="symbol" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="system" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="word" optional="YES" attributeType="String" defaultValueString=""/>
+        <relationship name="dictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WordDictionary" inverseName="words" inverseEntity="WordDictionary"/>
     </entity>
     <entity name="WordDictionary" representedClassName="WordDictionary" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createBy" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastVersion" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="system" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="words" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Word" inverseName="dictionary" inverseEntity="Word"/>
     </entity>
 </model>

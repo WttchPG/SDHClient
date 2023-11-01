@@ -17,42 +17,49 @@ struct MainView: View {
     @ObservedObject private var vm = MainViewModel()
     // 显示更新的词库面板
     @State var showDictionaryUpdate: Bool = false
+    @State var selectionDictionary: WordDictionaryDTO? = nil
     
     init(userInfo: UserDTO) {
         self.userInfo = userInfo
     }
     
     var body: some View {
-        GeometryReader(content: { geometry in
+        NavigationSplitView(sidebar: {
+            List(vm.localWordDictionaryDTO, selection: $selectionDictionary, rowContent: { dictionary in
+                HStack {
+                    Text(dictionary.name)
+                }.tag(dictionary)
+            })
+        }, detail: {
             VStack {
-                
-            }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-//            .background(content: {
-//                ZStack {
-//                    Image("login-bg")
-//                        .resizable()
-//                        .scaledToFill()
-//                    
-//                    Color.black
-//                        .opacity(0.5)
-//                }
-//            })
-        })
-        .sheet(isPresented: $showDictionaryUpdate, content: {
-            VStack {
-                ForEach(vm.needAdd, content: {dict in
-                    HStack {
-                        Text("\(dict.name) 词汇量: \(dict.count)需要添加")
+                if let words: [WordDTO] = selectionDictionary?.words {
+                    List(words) { word in
+                        DictionaryWordListWordView(word: word)
                     }
-                })
-                ForEach(vm.needUpdateLocal, content: { dict in
+//                    .scrollContentBackground(.hidden)
+//                    .colorScheme(.light)
+//                    .tableStyle(InsetTableStyle())
+                }
+                if showDictionaryUpdate {
+                    Spacer()
+                    
                     HStack {
-                        Text("\(dict.name ?? "None")需要更新!")
+                        Text("\(vm.syncStateDesc)")
+                        ProgressView(value: vm.syncProgress)
+                            .progressViewStyle(LinearProgressViewStyle())
                     }
-                })
+                    .frame(height: 24)
+                    .padding(.horizontal, 24)
+                    .background(Color.black.opacity(0.6))
+                    .onAppear {
+                        let needAddIds = vm.needAdd.map { $0.id }
+                        vm.loadDictionaryWithWord(jwt: storagedJwt, ids: needAddIds)
+                    }
+                    .onChange(of: vm.dictionaryWithWord) { _, newValue in
+                        vm.syncDictionary()
+                    }
+                }
             }
-            .padding()
         })
         .onChange(of: vm.needAdd, { oldValue, newValue in
             self.showDictionaryUpdate = true

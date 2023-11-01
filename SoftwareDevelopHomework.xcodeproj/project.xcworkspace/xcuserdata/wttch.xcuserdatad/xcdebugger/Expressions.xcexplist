@@ -5,5 +5,13 @@
       <ContextState
          contextName = "closure #2 in APIRequestBuilder.build():BaseAPIService.swift">
       </ContextState>
+      <ContextState
+         contextName = "MainViewModel.loadDictionaryDTOs():MainViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.localWordDictionaryDTO">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
