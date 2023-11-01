@@ -31,7 +31,7 @@ func mainWindow() -> some Scene {
             Text("错误! 没有用户信息！")
         }
     }
-    .windowStyle(.hiddenTitleBar)
+//    .windowStyle(.hiddenTitleBar)
 }
 
 extension DismissWindowAction {
