@@ -80,12 +80,15 @@ struct AlertMessageView<Content>: View where Content: View{
     @State private var message: AlertMessage? = nil
     
     private var cancelles: [AnyCancellable] = []
+    private let publisher: AnyPublisher<AlertMessage, Never>
     
-    init(@ViewBuilder content: () -> Content) {
+    init(publisher: AnyPublisher<AlertMessage, Never>, @ViewBuilder content: () -> Content) {
+        self.publisher = publisher
         self.wrappedView = content()
     }
     
-    init(content: Content) {
+    init(publisher: AnyPublisher<AlertMessage, Never>, content: Content) {
+        self.publisher = publisher
         self.wrappedView = content
     }
     
@@ -115,7 +118,7 @@ struct AlertMessageView<Content>: View where Content: View{
             
             wrappedView
         }
-        .onReceive(AlertMessageManager.instance.publisher, perform: { msg in
+        .onReceive(publisher, perform: { msg in
             self.message = msg
             withAnimation {
                 self.offset = 0
@@ -130,27 +133,30 @@ struct AlertMessageView<Content>: View where Content: View{
 }
 
 struct AlertMessageViewModifer: ViewModifier {
+    let publisher: AnyPublisher<AlertMessage, Never>
+    
     func body(content: Content) -> some View {
-        return AlertMessageView(content: content)
+        return AlertMessageView(publisher: publisher, content: content)
     }
 }
 
 extension View {
-    func wrapperAlert() -> some View {
-        return self.modifier(AlertMessageViewModifer())
+    func wrapperAlert(publisher: AnyPublisher<AlertMessage, Never>) -> some View {
+        return self.modifier(AlertMessageViewModifer(publisher: publisher))
     }
 }
 
 #Preview {
-    VStack {
+    let publisher = PassthroughSubject<AlertMessage, Never>()
+    return VStack {
         Text("测试")
     
         Text("测试")
         
         Button("发送") {
-            AlertMessageManager.instance.publisher.send(AlertMessage(type: .error, message: "测试"))
+            publisher.send(AlertMessage(type: .error, message: "测试"))
         }
     }
     .frame(width: 400, height: 200)
-    .wrapperAlert()
+    .wrapperAlert(publisher: publisher.eraseToAnyPublisher())
 }

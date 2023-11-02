@@ -20,6 +20,8 @@ struct LoginView: View {
     @State private var password: String = ""
     @ObservedObject private var vm = LoginViewModel()
     
+    @API("auth/login") var test: String = ""
+    
     var body: some View {
         GeometryReader(content: { geometry in
             VStack {
@@ -52,22 +54,22 @@ struct LoginView: View {
             .padding(.horizontal, 48)
         })
         .ignoresSafeArea(edges: .top)
-        .wrapperAlert()
+        .wrapperAlert(publisher: Just(AlertMessage(type: .warning, message: "测试")).eraseToAnyPublisher())
         .onChange(of: vm.alertMessage, initial: false) { msg, _ in
             guard let msg = vm.alertMessage else { return }
             AlertMessageManager.send(msg)
         }
-        .onChange(of: vm.jwt, initial: false) { _, newJwt in
-            self.storagedJwt = newJwt
-            if let jwt = newJwt {
-                // 登录成功
-                AlertMessageManager.success("登录成功!")
-                vm.userInfo(jwt: jwt)
-            } else {
-                // jwt 失效
-                AlertMessageManager.warning("jwt 失效!")
-            }
-        }
+//        .onChange(of: vm.jwt, initial: false) { _, newJwt in
+//            self.storagedJwt = newJwt
+//            if let jwt = newJwt {
+//                // 登录成功
+//                AlertMessageManager.success("登录成功!")
+//                vm.userInfo(jwt: jwt)
+//            } else {
+//                // jwt 失效
+//                AlertMessageManager.warning("jwt 失效!")
+//            }
+//        }
         .onChange(of: vm.userInfo, { oldValue, newValue in
             if let userInfo = vm.userInfo {
                 dismissWindow(window: .login)
@@ -85,6 +87,15 @@ struct LoginView: View {
             }
             logger.logLevel = .debug
         }
+        .onAppear {
+            $test.post([
+                "username": username,
+                "password": password
+            ])
+        }
+        .onReceive($test.completionPublisher, perform: { _ in
+            print("completion")
+        })
     }
     
     private func loginView(geometry: GeometryProxy) -> some View {
@@ -135,7 +146,7 @@ struct LoginView: View {
 // MARK: ViewModel
 class LoginViewModel: ObservableObject {
     @Published var alertMessage: AlertMessage? = nil
-    @Published var jwt: String? = nil
+//    @Published var jwt: String? = nil
     @Published var loadingUserInfo = false
     @Published var userInfo: UserDTO? = nil
     
@@ -148,9 +159,9 @@ class LoginViewModel: ObservableObject {
             self.alertMessage = $0
         }.store(in: &cancelles)
         
-        service.$jwt.sink {
-            self.jwt = $0
-        }.store(in: &cancelles)
+//        service.$jwt.sink {
+//            self.jwt = $0
+//        }.store(in: &cancelles)
         
         service.$userInfo.sink {
             self.userInfo = $0
