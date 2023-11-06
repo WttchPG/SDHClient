@@ -37,7 +37,7 @@ class WordSerivce: BaseAPIService {
                 completion?()
                 logger.debug("下载词典列表完成.")
             } receiveValue: { data in
-                if let data = data, !data.isEmpty {
+                if !data.isEmpty {
                     self.wordDictionaries = data
                 }
             }
@@ -61,11 +61,7 @@ class WordSerivce: BaseAPIService {
                 completion?()
                 logger.debug("下载词典和单词数据完成.")
             }, receiveValue: {
-                if let dictionaries = $0 {
-                    self.dictionariesWithWords = dictionaries
-                } else {
-                    logger.warning("下载词典和单词数据返回值为空.")
-                }
+                self.dictionariesWithWords = $0
             })
     }
         

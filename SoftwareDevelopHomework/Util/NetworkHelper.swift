@@ -8,16 +8,6 @@
 import Foundation
 import Combine
 
-///
-/// 网络请求错误。
-///
-enum NetworkError: LocalizedError {
-    /// 网络错误
-    case networkError(msg: String)
-    /// http 请求 code 不为 200
-    case badResponse(code: Int)
-}
-
 
 /// api 网路请求
 /// 只是简单的 http 请求包装，不做太多的错误处理。

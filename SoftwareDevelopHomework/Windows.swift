@@ -41,6 +41,11 @@ extension DismissWindowAction {
 }
 
 extension OpenWindowAction {
+    
+    func callAsFunction(window: Windows) {
+        self.callAsFunction(id: window.rawValue)
+    }
+    
     func callAsFunction<D: Codable & Hashable>(window: Windows, data: D) {
         self.callAsFunction(id: window.rawValue, value: data)
     }

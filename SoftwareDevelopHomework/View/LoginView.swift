@@ -21,6 +21,10 @@ struct LoginView: View {
     @ObservedObject private var vm = LoginViewModel()
     
     @API("auth/login") var test: String = ""
+    @API("auth/user") var userInfo: UserDTO? = nil
+    @FocusState private var passwordFieldFocus: Bool
+    
+    private let uiMessagePublisher = PassthroughSubject<AlertMessage, Never>()
     
     var body: some View {
         GeometryReader(content: { geometry in
@@ -30,10 +34,13 @@ struct LoginView: View {
                     if let userInfo = vm.userInfo {
                         Text("你好! \(userInfo.realName), \(userInfo.email)")
                     }
-                    if vm.loadingUserInfo {
-                        ProgressView(label: {
-                            Text("获取用户信息!")
-                        })
+                    if $userInfo.running {
+                        HStack {
+                            ProgressView()
+                            Text("正在获取用户信息...")
+                        }
+                        .font(.title)
+                        .foregroundStyle(.white)
                     }
                 } else {
                     loginView(geometry: geometry)
@@ -54,26 +61,17 @@ struct LoginView: View {
             .padding(.horizontal, 48)
         })
         .ignoresSafeArea(edges: .top)
-        .wrapperAlert(publisher: Just(AlertMessage(type: .warning, message: "测试")).eraseToAnyPublisher())
-        .onChange(of: vm.alertMessage, initial: false) { msg, _ in
-            guard let msg = vm.alertMessage else { return }
-            AlertMessageManager.send(msg)
-        }
-//        .onChange(of: vm.jwt, initial: false) { _, newJwt in
-//            self.storagedJwt = newJwt
-//            if let jwt = newJwt {
-//                // 登录成功
-//                AlertMessageManager.success("登录成功!")
-//                vm.userInfo(jwt: jwt)
-//            } else {
-//                // jwt 失效
-//                AlertMessageManager.warning("jwt 失效!")
-//            }
-//        }
-        .onChange(of: vm.userInfo, { oldValue, newValue in
-            if let userInfo = vm.userInfo {
+        .wrapperAlert(publisher: self.alertMessagePublisher)
+        .onChange(of: $test.data, { _, newValue in
+            self.uiMessagePublisher.send(.success("登录成功!"))
+            self.storagedJwt = newValue
+            $userInfo.post(jwt: self.storagedJwt, delay: 2)
+        })
+        .onChange(of: userInfo, { _, newValue in
+            if let userInfo = newValue {
                 dismissWindow(window: .login)
                 openWindow(window: .main, data: userInfo)
+                self.userInfo = nil
             }
         })
         .on401 {
@@ -82,22 +80,15 @@ struct LoginView: View {
         }
         .onAppear {
             if let jwt = self.storagedJwt {
-                print("已存在 jwt， 尝试获取用户信息...")
-                vm.userInfo(jwt: jwt)
+                logger.debug("已存在 jwt， 尝试获取用户信息...")
+                $userInfo.post(jwt: jwt, delay: 2)
             }
             logger.logLevel = .debug
         }
-        .onAppear {
-            $test.post([
-                "username": username,
-                "password": password
-            ])
-        }
-        .onReceive($test.completionPublisher, perform: { _ in
-            print("completion")
-        })
     }
     
+    
+    /// 登录视图
     private func loginView(geometry: GeometryProxy) -> some View {
         VStack(spacing: 24) {
             HStack {
@@ -112,29 +103,62 @@ struct LoginView: View {
             
             TextField("请输入账号", text: $username)
                 .multilineTextAlignment(.center)
+                .onSubmit {
+                    self.passwordFieldFocus = true
+                }
             SecureField("请输入密码", text: $password)
                 .multilineTextAlignment(.center)
+                .focused($passwordFieldFocus, equals: true)
+                .onSubmit {
+                    self.login()
+                }
             
             Button(action: {
                 login()
             }, label: {
-                Text("登录")
+                Text("登录\($test.running ? "中..." : "")")
                     .padding(.vertical, 4)
                     .frame(maxWidth: .infinity)
             })
+            .disabled($test.running)
         }
         .foregroundColor(.white)
         .font(.title)
     }
     
-    
+    /// 登录
     private func login() {
         guard !username.isEmpty && !password.isEmpty else {
-            AlertMessageManager.warning("账号或密码为空!")
+            self.uiMessagePublisher.send(AlertMessage.warning("账号或密码为空!"))
             return
         }
         
-        vm.login(username: username, password: password)
+        $test.post([
+            "username": username,
+            "password": password
+        ])
+    }
+    
+    /// 处理错误消息给弹窗
+    private var alertMessagePublisher: AnyPublisher<AlertMessage, Never>  {
+        return $test.errorPublisher
+            .merge(with: $userInfo.errorPublisher)
+            .map { error in
+                if let error = error as? ServiceError {
+                    switch error {
+                    case .dataNil:
+                        return AlertMessage(type: .warning, message: "数据为空")
+                    case .serviceError(_, let msg):
+                        return AlertMessage.warning(msg)
+                    default:
+                        return AlertMessage(type: .error, message: "未知错误")
+                    }
+                }
+                
+                return AlertMessage(type: .warning, message: error.localizedDescription)
+            }
+            .merge(with: self.uiMessagePublisher)
+            .eraseToAnyPublisher()
     }
 }
 
@@ -145,8 +169,6 @@ struct LoginView: View {
 
 // MARK: ViewModel
 class LoginViewModel: ObservableObject {
-    @Published var alertMessage: AlertMessage? = nil
-//    @Published var jwt: String? = nil
     @Published var loadingUserInfo = false
     @Published var userInfo: UserDTO? = nil
     
@@ -155,21 +177,10 @@ class LoginViewModel: ObservableObject {
     private var cancelles: [AnyCancellable] = []
     
     init() {
-        service.$alertMessage.sink{
-            self.alertMessage = $0
-        }.store(in: &cancelles)
-        
-//        service.$jwt.sink {
-//            self.jwt = $0
-//        }.store(in: &cancelles)
         
         service.$userInfo.sink {
             self.userInfo = $0
         }.store(in: &cancelles)
-    }
-    
-    func login(username: String, password: String) {
-        service.login(username: username, password: password)
     }
     
     func userInfo(jwt: String) {

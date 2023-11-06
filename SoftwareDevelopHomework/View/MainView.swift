@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
+    // 打开关闭窗口
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
     let userInfo: UserDTO
     
     @AppStorage("jwt") private var storagedJwt: String?
@@ -95,7 +98,12 @@ struct MainView: View {
                                     Text(userInfo.email)
                                 }
                                 Button("登出") {
-                                    
+                                    self.storagedJwt = nil
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                                        // 重新登录
+                                        dismissWindow(window: .main)
+                                        openWindow(window: .login)
+                                    })
                                 }
                                 .buttonStyle(.link)
                             }
@@ -116,6 +124,8 @@ struct MainView: View {
                 vm.loadLocalWordDictionary()
             } else {
                 // 重新登录
+                dismissWindow(window: .main)
+                openWindow(window: .login)
             }
         }
     }

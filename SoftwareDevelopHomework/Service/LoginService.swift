@@ -12,21 +12,7 @@ class LoginService: BaseAPIService {
     @Published var jwt: String? = nil
     @Published var userInfo: UserDTO? = nil
     
-    private var loginCancelable: AnyCancellable? = nil
     private var userInfoCancellable: AnyCancellable? = nil
-    
-    func login(username: String, password: String) {
-        loginCancelable = self.builder(index: "auth/login", type: String.self)
-            .data([
-                "username": username,
-                "password": password
-            ])
-            .build()
-            .sink(receiveValue: {
-                self.jwt = $0
-                logger.info("获取 token 成功!")
-            })
-    }
     
     func userInfo(jwt: String, completion: (() ->())? = nil) {
         userInfoCancellable = self.builder(index: "auth/user", type: UserDTO.self)

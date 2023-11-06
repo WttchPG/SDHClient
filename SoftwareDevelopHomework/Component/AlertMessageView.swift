@@ -26,6 +26,22 @@ struct AlertMessage: Equatable {
     static func ==(lhs: AlertMessage, rhs: AlertMessage) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    static func info(_ msg: String) -> AlertMessage {
+        return AlertMessage(type: .info, message: msg)
+    }
+
+    static func success(_ msg: String) -> AlertMessage {
+        return AlertMessage(type: .success, message: msg)
+    }
+    
+    static func warning(_ msg: String) -> AlertMessage {
+        return AlertMessage(type: .warning, message: msg)
+    }
+    
+    static func error(_ msg: String) -> AlertMessage {
+        return AlertMessage(type: .error, message: msg)
+    }
 }
 
 /// 消息类型
