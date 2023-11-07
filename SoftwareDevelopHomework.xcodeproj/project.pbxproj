@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		493BBF082AEB604C00AAB322 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF072AEB604C00AAB322 /* LoginService.swift */; };
-		493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF092AEB607400AAB322 /* BaseAPIService.swift */; };
+		49278A3C2AFA4C8A000CDDB3 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A3B2AFA4C8A000CDDB3 /* BaseAPIService.swift */; };
 		493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0B2AEB674F00AAB322 /* LoginView.swift */; };
 		493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */; };
 		4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDB62AEEA0C100E97C51 /* Windows.swift */; };
@@ -61,8 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		493BBF072AEB604C00AAB322 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
-		493BBF092AEB607400AAB322 /* BaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAPIService.swift; path = ../../../../../Music/BaseAPIService.swift; sourceTree = "<group>"; };
+		49278A3B2AFA4C8A000CDDB3 /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
 		493BBF0B2AEB674F00AAB322 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		4944DDB62AEEA0C100E97C51 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
@@ -138,8 +136,7 @@
 		493BBF062AEB603F00AAB322 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				493BBF092AEB607400AAB322 /* BaseAPIService.swift */,
-				493BBF072AEB604C00AAB322 /* LoginService.swift */,
+				49278A3B2AFA4C8A000CDDB3 /* BaseAPIService.swift */,
 				4944DDC12AEFCCEB00E97C51 /* WordSerivce.swift */,
 				4944DDCB2AEFE0B100E97C51 /* CoreDataManager.swift */,
 			);
@@ -421,7 +418,6 @@
 			files = (
 				49D602BE2AE8DF1A00867C50 /* Group.swift in Sources */,
 				4944DDB92AEF810200E97C51 /* MainView.swift in Sources */,
-				493BBF0A2AEB607400AAB322 /* BaseAPIService.swift in Sources */,
 				494AE7E32AEA4B5D00E08202 /* NetworkHelper.swift in Sources */,
 				49ABC5D62AF21D5C0078374E /* DictionaryWordListView.swift in Sources */,
 				493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */,
@@ -436,6 +432,7 @@
 				49CEC98A2AE15A4100313DBB /* CalenderView.swift in Sources */,
 				49ABC5D82AF21DAC0078374E /* AdvMeanView.swift in Sources */,
 				4944DDBC2AEFC95D00E97C51 /* SDH.xcdatamodeld in Sources */,
+				49278A3C2AFA4C8A000CDDB3 /* BaseAPIService.swift in Sources */,
 				49D602C32AE8E2C400867C50 /* ArrayExts.swift in Sources */,
 				49FCCCB42AE0258900FF8E3D /* CalendarUtil.swift in Sources */,
 				4944DDC22AEFCCEB00E97C51 /* WordSerivce.swift in Sources */,
@@ -445,7 +442,6 @@
 				49D602BC2AE8DF0900867C50 /* College.swift in Sources */,
 				49D602C02AE8DF2600867C50 /* Student.swift in Sources */,
 				493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */,
-				493BBF082AEB604C00AAB322 /* LoginService.swift in Sources */,
 				4944DDC52AEFCE3300E97C51 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

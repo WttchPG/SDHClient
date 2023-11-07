@@ -16,9 +16,7 @@ struct LoginView: View {
     
     @AppStorage("jwt") private var storagedJwt: String?
     @AppStorage("login_username") private var username: String = ""
-    
-    @State private var password: String = ""
-    @ObservedObject private var vm = LoginViewModel()
+    @AppStorage("login_password") private var password: String = ""
     
     @API("auth/login") var test: String = ""
     @API("auth/user") var userInfo: UserDTO? = nil
@@ -31,7 +29,7 @@ struct LoginView: View {
             VStack {
                 Spacer()
                 if let jwt = self.storagedJwt {
-                    if let userInfo = vm.userInfo {
+                    if let userInfo = userInfo {
                         Text("你好! \(userInfo.realName), \(userInfo.email)")
                     }
                     if $userInfo.running {
@@ -85,6 +83,9 @@ struct LoginView: View {
             }
             logger.logLevel = .debug
         }
+        .onReceive($userInfo.errorPublisher.catchServiceCode(401), perform: { _ in
+            self.storagedJwt = nil
+        })
     }
     
     
@@ -164,30 +165,4 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
-}
-
-
-// MARK: ViewModel
-class LoginViewModel: ObservableObject {
-    @Published var loadingUserInfo = false
-    @Published var userInfo: UserDTO? = nil
-    
-    private var service = LoginService()
-    
-    private var cancelles: [AnyCancellable] = []
-    
-    init() {
-        
-        service.$userInfo.sink {
-            self.userInfo = $0
-        }.store(in: &cancelles)
-    }
-    
-    func userInfo(jwt: String) {
-        self.loadingUserInfo = true
-        service.userInfo(jwt: jwt) {
-            self.loadingUserInfo = false
-        }
-    }
-    
 }
