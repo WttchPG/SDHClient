@@ -13,5 +13,11 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in APIPublisher.init(wrappedValue:_:):BaseAPIService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in APIPublisher.setup&lt;&#x3c4;_0_0&gt;(_:):APIPublisher.swift">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

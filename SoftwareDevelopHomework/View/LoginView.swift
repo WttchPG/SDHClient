@@ -18,9 +18,9 @@ struct LoginView: View {
     @AppStorage("login_username") private var username: String = ""
     @AppStorage("login_password") private var password: String = ""
     
-    @API("auth/login") var test: String = ""
-    @API("auth/user") var userInfo: UserDTO? = nil
     @FocusState private var passwordFieldFocus: Bool
+    
+    @ObservedObject private var vm = LoginViewModel()
     
     private let uiMessagePublisher = PassthroughSubject<AlertMessage, Never>()
     
@@ -29,10 +29,10 @@ struct LoginView: View {
             VStack {
                 Spacer()
                 if let jwt = self.storagedJwt {
-                    if let userInfo = userInfo {
+                    if let userInfo = vm.userInfo {
                         Text("你好! \(userInfo.realName), \(userInfo.email)")
                     }
-                    if $userInfo.running {
+                    if vm.$userInfo.running {
                         HStack {
                             ProgressView()
                             Text("正在获取用户信息...")
@@ -60,30 +60,26 @@ struct LoginView: View {
         })
         .ignoresSafeArea(edges: .top)
         .wrapperAlert(publisher: self.alertMessagePublisher)
-        .onChange(of: $test.data, { _, newValue in
+        .onChange(of: vm.$jwt.data, { _, newValue in
             self.uiMessagePublisher.send(.success("登录成功!"))
             self.storagedJwt = newValue
-            $userInfo.post(jwt: self.storagedJwt, delay: 2)
+            vm.$userInfo.post(jwt: self.storagedJwt, delay: 2)
         })
-        .onChange(of: userInfo, { _, newValue in
+        .onChange(of: vm.userInfo, { _, newValue in
             if let userInfo = newValue {
                 dismissWindow(window: .login)
                 openWindow(window: .main, data: userInfo)
-                self.userInfo = nil
+                self.vm.userInfo = nil
             }
         })
-        .on401 {
-            logger.info("收到 401 事件:\($0)")
-            self.storagedJwt = nil
-        }
         .onAppear {
             if let jwt = self.storagedJwt {
                 logger.debug("已存在 jwt， 尝试获取用户信息...")
-                $userInfo.post(jwt: jwt, delay: 2)
+                vm.$userInfo.post(jwt: jwt, delay: 2)
             }
             logger.logLevel = .debug
         }
-        .onReceive($userInfo.errorPublisher.catchServiceCode(401), perform: { _ in
+        .onReceive(vm.$userInfo.errorPublisher.catchServiceCode(401), perform: { _ in
             self.storagedJwt = nil
         })
     }
@@ -117,11 +113,13 @@ struct LoginView: View {
             Button(action: {
                 login()
             }, label: {
-                Text("登录\($test.running ? "中..." : "")")
+                Text("\(vm.jwt)")
+                Text("\(vm.userInfo?.name ?? "")")
+                Text("登录\(vm.$jwt.running ? "中..." : "")")
                     .padding(.vertical, 4)
                     .frame(maxWidth: .infinity)
             })
-            .disabled($test.running)
+            .disabled(vm.$jwt.running)
         }
         .foregroundColor(.white)
         .font(.title)
@@ -134,16 +132,18 @@ struct LoginView: View {
             return
         }
         
-        $test.post([
+        let data = [
             "username": username,
             "password": password
-        ])
+        ]
+        
+        vm.$jwt.post(data)
     }
     
     /// 处理错误消息给弹窗
     private var alertMessagePublisher: AnyPublisher<AlertMessage, Never>  {
-        return $test.errorPublisher
-            .merge(with: $userInfo.errorPublisher)
+        return vm.$jwt.errorPublisher
+            .merge(with: vm.$userInfo.errorPublisher)
             .map { error in
                 if let error = error as? ServiceError {
                     switch error {

@@ -3,4 +3,70 @@
    uuid = "BB2FE8E7-3A0C-423A-B599-323C9F8D2F19"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B67E9D9C-7ADD-43DE-AB04-9CCB77D3120A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SoftwareDevelopHomework/View/LoginView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "B67E9D9C-7ADD-43DE-AB04-9CCB77D3120A - 4bacb0fefb19eef2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Optional&lt;SoftwareDevelopHomework.UserDTO&gt;, Swift.Optional&lt;SoftwareDevelopHomework.UserDTO&gt;) -&gt; () in SoftwareDevelopHomework.LoginView.body.getter : some"
+                  moduleName = "SoftwareDevelopHomework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wttch/workspace/apple/SoftwareDevelopHomework/SoftwareDevelopHomework/View/LoginView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "792">
+               </Location>
+               <Location
+                  uuid = "B67E9D9C-7ADD-43DE-AB04-9CCB77D3120A - 4bacb0fefb19eef2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Optional&lt;SoftwareDevelopHomework.UserDTO&gt;, Swift.Optional&lt;SoftwareDevelopHomework.UserDTO&gt;) -&gt; () in SoftwareDevelopHomework.LoginView.body.getter : some"
+                  moduleName = "SoftwareDevelopHomework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wttch/workspace/apple/SoftwareDevelopHomework/SoftwareDevelopHomework/View/LoginView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "1036">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "968B3001-3FE8-411F-A050-F7233F293173"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SoftwareDevelopHomework/View/LoginView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

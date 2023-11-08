@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		49278A3C2AFA4C8A000CDDB3 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A3B2AFA4C8A000CDDB3 /* BaseAPIService.swift */; };
+		49278A422AFB4E4A000CDDB3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A412AFB4E4A000CDDB3 /* LoginViewModel.swift */; };
+		49278A452AFB7F25000CDDB3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A442AFB7F25000CDDB3 /* API.swift */; };
+		49278A472AFB7F75000CDDB3 /* APIPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A462AFB7F75000CDDB3 /* APIPublisher.swift */; };
+		49278A492AFB7F92000CDDB3 /* APIExts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A482AFB7F92000CDDB3 /* APIExts.swift */; };
+		49278A4B2AFB7FBB000CDDB3 /* APIRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49278A4A2AFB7FBB000CDDB3 /* APIRequestBuilder.swift */; };
 		493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0B2AEB674F00AAB322 /* LoginView.swift */; };
 		493BBF0E2AEB89CE00AAB322 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */; };
 		4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944DDB62AEEA0C100E97C51 /* Windows.swift */; };
@@ -61,6 +66,11 @@
 
 /* Begin PBXFileReference section */
 		49278A3B2AFA4C8A000CDDB3 /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
+		49278A412AFB4E4A000CDDB3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		49278A442AFB7F25000CDDB3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		49278A462AFB7F75000CDDB3 /* APIPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPublisher.swift; sourceTree = "<group>"; };
+		49278A482AFB7F92000CDDB3 /* APIExts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIExts.swift; sourceTree = "<group>"; };
+		49278A4A2AFB7FBB000CDDB3 /* APIRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestBuilder.swift; sourceTree = "<group>"; };
 		493BBF0B2AEB674F00AAB322 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		493BBF0D2AEB89CE00AAB322 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		4944DDB62AEEA0C100E97C51 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
@@ -133,9 +143,21 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		49278A432AFB7F19000CDDB3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				49278A442AFB7F25000CDDB3 /* API.swift */,
+				49278A462AFB7F75000CDDB3 /* APIPublisher.swift */,
+				49278A482AFB7F92000CDDB3 /* APIExts.swift */,
+				49278A4A2AFB7FBB000CDDB3 /* APIRequestBuilder.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		493BBF062AEB603F00AAB322 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				49278A432AFB7F19000CDDB3 /* API */,
 				49278A3B2AFA4C8A000CDDB3 /* BaseAPIService.swift */,
 				4944DDC12AEFCCEB00E97C51 /* WordSerivce.swift */,
 				4944DDCB2AEFE0B100E97C51 /* CoreDataManager.swift */,
@@ -147,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				4944DDC42AEFCE3300E97C51 /* MainViewModel.swift */,
+				49278A412AFB4E4A000CDDB3 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -425,21 +448,26 @@
 				4944DDCC2AEFE0B100E97C51 /* CoreDataManager.swift in Sources */,
 				4944DDB72AEEA0C100E97C51 /* Windows.swift in Sources */,
 				49FCCC882AE023DF00FF8E3D /* SoftwareDevelopHomeworkApp.swift in Sources */,
+				49278A472AFB7F75000CDDB3 /* APIPublisher.swift in Sources */,
 				49CEC98C2AE15E8D00313DBB /* CalenderSeletor.swift in Sources */,
 				494AE7E92AEA7BC600E08202 /* AlertMessageView.swift in Sources */,
 				494AE7E62AEA4BA400E08202 /* APIResponse.swift in Sources */,
 				4944DDBE2AEFCA5400E97C51 /* WordDictionaryDTO.swift in Sources */,
+				49278A492AFB7F92000CDDB3 /* APIExts.swift in Sources */,
 				49CEC98A2AE15A4100313DBB /* CalenderView.swift in Sources */,
+				49278A452AFB7F25000CDDB3 /* API.swift in Sources */,
 				49ABC5D82AF21DAC0078374E /* AdvMeanView.swift in Sources */,
 				4944DDBC2AEFC95D00E97C51 /* SDH.xcdatamodeld in Sources */,
 				49278A3C2AFA4C8A000CDDB3 /* BaseAPIService.swift in Sources */,
 				49D602C32AE8E2C400867C50 /* ArrayExts.swift in Sources */,
 				49FCCCB42AE0258900FF8E3D /* CalendarUtil.swift in Sources */,
 				4944DDC22AEFCCEB00E97C51 /* WordSerivce.swift in Sources */,
+				49278A422AFB4E4A000CDDB3 /* LoginViewModel.swift in Sources */,
 				494A86B72AF8F51100D00EBE /* Errors.swift in Sources */,
 				4944DDC02AEFCA5B00E97C51 /* WordDTO.swift in Sources */,
 				49ABC5DA2AF21E340078374E /* DictionaryWordListWordView.swift in Sources */,
 				49D602BC2AE8DF0900867C50 /* College.swift in Sources */,
+				49278A4B2AFB7FBB000CDDB3 /* APIRequestBuilder.swift in Sources */,
 				49D602C02AE8DF2600867C50 /* Student.swift in Sources */,
 				493BBF0C2AEB674F00AAB322 /* LoginView.swift in Sources */,
 				4944DDC52AEFCE3300E97C51 /* MainViewModel.swift in Sources */,
