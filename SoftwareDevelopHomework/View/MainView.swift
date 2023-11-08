@@ -30,13 +30,14 @@ struct MainView: View {
     var body: some View {
     
         VStack {
-            if let words: [WordDTO] = selectionDictionary?.words {
+            if let words: [WordDTO] = selectionDictionary?.words, !words.isEmpty {
                 List(words) { word in
                     DictionaryWordListWordView(word: word)
                 }
-//                    .scrollContentBackground(.hidden)
-//                    .colorScheme(.light)
-//                    .tableStyle(InsetTableStyle())
+            } else {
+                Label("单词本[\(selectionDictionary?.name ?? "")]是空的!", systemImage: "xmark.bin.circle")
+                    .font(.largeTitle)
+                    .foregroundStyle(.purple)
             }
             if showDictionaryUpdate {
                 Spacer()
@@ -65,6 +66,9 @@ struct MainView: View {
         .onChange(of: vm.needUpdateLocal, { oldValue, newValue in
             self.showDictionaryUpdate = true
         })
+        .onChange(of: vm.localWordDictionaryDTO, { _, newValue in
+            self.selectionDictionary = newValue.first
+        })
         .toolbar(content: {
             ToolbarItem(placement: .navigation, content: {
                 Button(action: {
@@ -85,8 +89,14 @@ struct MainView: View {
                     .padding()
                 })
             })
-        })
-        .toolbar(content: {
+            ToolbarItem(placement: .status) {
+                Button(action: {
+                    
+                }, label: {
+                    Image(systemName: "chart.bar.doc.horizontal")
+                    Text("开始测试")
+                })
+            }
             ToolbarItemGroup(content: {
                 HStack {
                     Image(systemName: "person.circle")
@@ -128,9 +138,12 @@ struct MainView: View {
                 openWindow(window: .login)
             }
         }
+        .onAppear {
+        }
     }
 }
 
 #Preview {
     MainView(userInfo: UserDTO(id: 1, name: "wttch", realName: "王冲", tel: "187xxxx9458", email: "wttch@wttch.com"))
 }
+

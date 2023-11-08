@@ -14,9 +14,9 @@ struct LoginView: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     
-    @AppStorage("jwt") private var storagedJwt: String?
-    @AppStorage("login_username") private var username: String = ""
-    @AppStorage("login_password") private var password: String = ""
+    @AppStorage(.jwt) private var storagedJwt: String?
+    @AppStorage(.loginUserName) private var username: String = ""
+    @AppStorage(.loginPassword) private var password: String = ""
     
     @FocusState private var passwordFieldFocus: Bool
     
@@ -28,53 +28,23 @@ struct LoginView: View {
         GeometryReader(content: { geometry in
             VStack {
                 Spacer()
-                if let jwt = self.storagedJwt {
-                    if let userInfo = vm.userInfo {
-                        Text("你好! \(userInfo.realName), \(userInfo.email)")
-                    }
-                    if vm.$userInfo.running {
-                        HStack {
-                            ProgressView()
-                            Text("正在获取用户信息...")
-                        }
-                        .font(.title)
-                        .foregroundStyle(.white)
-                    }
+                if let _ = self.storagedJwt {
+                    loadingUserInfoView
                 } else {
                     loginView(geometry: geometry)
                 }
                 Spacer()
             }
-            .background(content: {
-                ZStack {
-                    Image("login-bg")
-                        .resizable()
-                        .scaledToFill()
-                    
-                    Color.black
-                        .opacity(0.5)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-            })
+            .background { background(geometry) }
             .padding(.horizontal, 48)
         })
-        .ignoresSafeArea(edges: .top)
+        // .ignoresSafeArea(edges: .top)
         .wrapperAlert(publisher: self.alertMessagePublisher)
-        .onChange(of: vm.$jwt.data, { _, newValue in
-            self.uiMessagePublisher.send(.success("登录成功!"))
-            self.storagedJwt = newValue
-            vm.$userInfo.post(jwt: self.storagedJwt, delay: 2)
-        })
-        .onChange(of: vm.userInfo, { _, newValue in
-            if let userInfo = newValue {
-                dismissWindow(window: .login)
-                openWindow(window: .main, data: userInfo)
-                self.vm.userInfo = nil
-            }
-        })
+        .onChange(of: vm.jwt, { self.loginSuccess($1) })
+        .onChange(of: vm.userInfo, { self.showUserInfo($1) })
         .onAppear {
             if let jwt = self.storagedJwt {
-                logger.debug("已存在 jwt， 尝试获取用户信息...")
+                self.uiMessagePublisher.send(.warning("欢迎回来..."))
                 vm.$userInfo.post(jwt: jwt, delay: 2)
             }
             logger.logLevel = .debug
@@ -83,7 +53,39 @@ struct LoginView: View {
             self.storagedJwt = nil
         })
     }
+}
+
+extension LoginView {
+    // MARK: 子视图
     
+    @ViewBuilder
+    private var loadingUserInfoView: some View {
+        if let userInfo = vm.userInfo {
+            Text("\(userInfo.realName), \(userInfo.email)")
+                .font(.largeTitle)
+        }
+        if vm.$userInfo.running {
+            HStack {
+                ProgressView()
+                Text("正在获取用户信息...")
+            }
+            .font(.title)
+            .foregroundStyle(.white)
+        }
+    }
+    
+    /// 背景
+    private func background(_ geometry: GeometryProxy) -> some View {
+        ZStack {
+            Image("login-bg")
+                .resizable()
+                .scaledToFill()
+            
+            Color.black
+                .opacity(0.5)
+        }
+        .frame(width: geometry.size.width, height: geometry.size.height)
+    }
     
     /// 登录视图
     private func loginView(geometry: GeometryProxy) -> some View {
@@ -125,6 +127,8 @@ struct LoginView: View {
         .font(.title)
     }
     
+    // MARK: 行为
+    
     /// 登录
     private func login() {
         guard !username.isEmpty && !password.isEmpty else {
@@ -138,6 +142,24 @@ struct LoginView: View {
         ]
         
         vm.$jwt.post(data)
+    }
+    
+    /// 登录成功
+    private func loginSuccess( _ jwt: String) {
+        self.uiMessagePublisher.send(.success("登录成功!"))
+        self.storagedJwt = jwt
+        vm.$userInfo.post(jwt: jwt, delay: 2)
+    }
+    /// 展示登录后获取的用户信息
+    private func showUserInfo(_ userInfo: UserDTO?) {
+        if let userInfo = userInfo {
+            uiMessagePublisher.send(.success("你好: \(userInfo.name)"))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                dismissWindow(window: .login)
+                openWindow(window: .main, data: userInfo)
+                self.vm.userInfo = nil
+            })
+        }
     }
     
     /// 处理错误消息给弹窗
@@ -162,6 +184,7 @@ struct LoginView: View {
             .eraseToAnyPublisher()
     }
 }
+
 
 #Preview {
     LoginView()

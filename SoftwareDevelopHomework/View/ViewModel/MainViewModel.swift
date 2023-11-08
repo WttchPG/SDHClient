@@ -11,11 +11,11 @@ import CoreData
 
 class MainViewModel: ObservableObject {
     // 服务器最新的词库信息
-    @Published var wordDictionaries: [WordDictionaryDTO] = []
+    @APIPublisher("word-dictionary/list") var wordDictionaries: [WordDictionaryDTO] = []
     // 本地词库
     @Published var localWordDictionaries: [WordDictionary] = []
     // 服务器词典，包含单词
-    @Published var dictionaryWithWord: [WordDictionaryDTO] = []
+    @APIPublisher("word-dictionary/words") var dictionaryWithWord: [WordDictionaryDTO] = []
     
     @Published var localWordDictionaryDTO: [WordDictionaryDTO] = []
     
@@ -36,23 +36,10 @@ class MainViewModel: ObservableObject {
     @Published var syncStateDesc: String = "发现新版本词库..."
     @Published var syncProgress: Float = 0.1
     
-    private var service = WordSerivce()
     private var anyCancellables: [AnyCancellable] = []
     
     init() {
-        service.$wordDictionaries.sink {
-            self.wordDictionaries = $0
-        }.store(in: &anyCancellables)
-        
-        service.$dictionariesWithWords.sink {
-            self.dictionaryWithWord = $0
-        }.store(in: &anyCancellables)
-        
-        service.$localWordDictionaries.sink {
-            self.localWordDictionaries = $0
-        }.store(in: &anyCancellables)
-        
-        self.$wordDictionaries.combineLatest(self.$localWordDictionaries)
+        self.$wordDictionaries.$data.combineLatest(self.$localWordDictionaries)
             .debounce(for: 0.5, scheduler: DispatchQueue.main)
             .sink { wordDictionaries, localWordDictionaries in
                 logger.info("开始比对网络/本地词库...")
@@ -99,17 +86,21 @@ class MainViewModel: ObservableObject {
     
     /// 下载词库版本
     func loadWordDictionary(jwt: String?) {
-        service.loadDictionaryList(jwt: jwt)
+        self.$wordDictionaries.post(jwt: jwt)
     }
     
     /// 下载词库
     func loadDictionaryWithWord(jwt: String?, ids: [Int]) {
         self.syncStateDesc = "开始同步词库..."
         self.syncProgress = 0.2
-        service.loadDictionaryWords(jwt: jwt, dictionaryIds: ids) {
+        self.$dictionaryWithWord.post([
+            "ids": ids
+        ], jwt: jwt, delay: 1.0)
+        
+        self.$dictionaryWithWord.completionPublisher.sink { _ in
             self.syncStateDesc = "词库下载完成。"
             self.syncProgress = 0.25
-        }
+        }.store(in: &anyCancellables)
     }
     
     /// 加载本地词库
